@@ -25,7 +25,7 @@ class TopicsController < ApplicationController
   # POST /topics.json
   def create
     @topic = Topic.new(topic_params)
-
+  #  binding.pry
     respond_to do |format|
       if @topic.save
         format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
@@ -35,6 +35,11 @@ class TopicsController < ApplicationController
         format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
+    # if @topic.save
+    #   render json: {message: 'success', topicId: @topic.id}, status: 200
+    # else
+    #   render json: { error: @topic.errors.full_messages.join(", ")}, status: 400
+    # end
   end
 
   # PATCH/PUT /topics/1
@@ -69,6 +74,6 @@ class TopicsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
-      params.require(:topic).permit(:name, :image)
+      params.require(:topic).permit(:image)
     end
 end
